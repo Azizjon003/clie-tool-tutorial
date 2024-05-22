@@ -2,6 +2,9 @@
 // const arg = require("arg");
 import arg from "arg";
 import chalk from "chalk";
+
+import { getConfig } from "../src/commands/config-mgr.js";
+import { start } from "../src/commands/start.js";
 try {
   const args = arg({
     "--start": Boolean,
@@ -11,7 +14,9 @@ try {
   // console.log(args);
 
   if (args["--start"]) {
-    console.log(chalk.bgCyanBright("starting the app"));
+    const config = await getConfig();
+    start(config);
+    // console.log(chalk.bgCyanBright("starting the app"));
   }
 } catch (e) {
   // console.log(e);
